@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcdjoetxjgtr8"]
+
+[ext_resource type="PackedScene" uid="uid://cmrmu0ljbjc1h" path="res://Scenes/Player/Player.tscn" id="1_1r6ip"]
+[ext_resource type="Texture2D" uid="uid://c4bpomb7w556b" path="res://Assets/Background.png" id="2_lixft"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_1r6ip")]
+z_index = 1
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(0.77, 0.77, 0.77, 1)
+position = Vector2(-7, -1)
+scale = Vector2(1.11133, 0.680664)
+texture = ExtResource("2_lixft")
+
+[node name="Camera2D" type="Camera2D" parent="Background"]
+scale = Vector2(1.5, 1.5)
+zoom = Vector2(0.77, 0.7)
+
+[node name="Black Background" type="ColorRect" parent="."]
+z_index = -2
+offset_left = -904.0
+offset_top = -466.0
+offset_right = 905.0
+offset_bottom = 506.0
+color = Color(0, 0, 0, 1)

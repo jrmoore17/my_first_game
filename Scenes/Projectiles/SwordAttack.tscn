@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmbet23qi2pgl"]
+
+[ext_resource type="Script" uid="uid://2sp7gv3our5e" path="res://Scripts/Projectiles/sword_attack.gd" id="1_tig7e"]
+
+[node name="SwordAttack" type="Area2D"]
+script = ExtResource("1_tig7e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(10, -16)
