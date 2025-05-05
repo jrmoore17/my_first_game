@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://nn8t2eapw8r3" path="res://Scripts/Player/player.gd" id="1_h54ih"]
 [ext_resource type="PackedScene" uid="uid://cmbet23qi2pgl" path="res://Scenes/Projectiles/SwordAttack.tscn" id="2_jmcll"]
 [ext_resource type="PackedScene" uid="uid://10j0qi3n651w" path="res://Scenes/Projectiles/Arrow.tscn" id="3_4wape"]
-[ext_resource type="Texture2D" uid="uid://bpd1lloub5ahw" path="res://Assets/_Attack.png" id="4_jmcll"]
-[ext_resource type="Texture2D" uid="uid://dsla25nghfant" path="res://Assets/_Idle.png" id="5_4wape"]
-[ext_resource type="Texture2D" uid="uid://bkcrkbjnio5j6" path="res://Assets/_Run.png" id="6_4wape"]
-[ext_resource type="Texture2D" uid="uid://88y02jl2y7b5" path="res://Assets/shadow.png" id="7_t26db"]
+[ext_resource type="Texture2D" uid="uid://evg4x1wupn34" path="res://Assets/_Attack.png" id="4_jmcll"]
+[ext_resource type="Texture2D" uid="uid://d1w7h5nw143aw" path="res://Assets/_Idle.png" id="5_4wape"]
+[ext_resource type="Texture2D" uid="uid://b3ripe5n5lyup" path="res://Assets/_Run.png" id="6_4wape"]
+[ext_resource type="Texture2D" uid="uid://coc3njl1rga1q" path="res://Assets/shadow.png" id="7_t26db"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t26db"]
 atlas = ExtResource("4_jmcll")
@@ -218,7 +218,7 @@ position = Vector2(-3, 18)
 scale = Vector2(0.0693359, 0.0834961)
 texture = ExtResource("7_t26db")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(-8, 1)
 scale = Vector2(2, 2)
 shape = SubResource("CapsuleShape2D_t26db")

@@ -3,11 +3,12 @@
 [ext_resource type="Script" uid="uid://2sp7gv3our5e" path="res://Scripts/Projectiles/sword_attack.gd" id="1_tig7e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_acl40"]
-size = Vector2(68, 44.5)
+size = Vector2(68.0135, 44)
 
 [node name="SwordAttack" type="Area2D"]
 script = ExtResource("1_tig7e")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
-position = Vector2(26, -4.25)
+position = Vector2(40, -5)
+scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_acl40")
