@@ -82,8 +82,10 @@ func shoot_arrow():
 		var arrow = arrow_scene.instantiate()
 		var attack_dir = get_mouse_direction().normalized()
 		arrow.position = global_position + attack_dir * 10
-		arrow.direction = attack_dir  # rotation handled inside Arrow.gd
+		arrow.direction = attack_dir
+		arrow.owner = self  # Set owner so arrow doesn't hit player
 		get_tree().current_scene.add_child(arrow)
+
 
 
 func get_mouse_direction() -> Vector2:

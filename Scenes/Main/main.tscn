@@ -59,3 +59,4 @@ shape = SubResource("RectangleShape2D_lixft")
 
 [node name="Goblin" parent="." instance=ExtResource("3_qw60k")]
 position = Vector2(0, -150)
+target_path = NodePath("../Player")

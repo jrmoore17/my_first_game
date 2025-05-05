@@ -6,6 +6,8 @@
 size = Vector2(68.0135, 44)
 
 [node name="SwordAttack" type="Area2D"]
+collision_layer = 8
+collision_mask = 2
 script = ExtResource("1_tig7e")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
