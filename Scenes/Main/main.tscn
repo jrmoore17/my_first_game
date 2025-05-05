@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://dcdjoetxjgtr8"]
+[gd_scene load_steps=5 format=3 uid="uid://dcdjoetxjgtr8"]
 
 [ext_resource type="PackedScene" uid="uid://cmrmu0ljbjc1h" path="res://Scenes/Player/Player.tscn" id="1_1r6ip"]
-[ext_resource type="Texture2D" uid="uid://c4bpomb7w556b" path="res://Assets/Background.png" id="2_lixft"]
+[ext_resource type="Texture2D" uid="uid://2yjsc2446f1h" path="res://Assets/Background.png" id="2_lixft"]
+[ext_resource type="PackedScene" uid="uid://dvl2kxd2a241a" path="res://Scenes/Mobs/goblin.tscn" id="3_qw60k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lixft"]
+size = Vector2(1248, 110)
 
 [node name="Main" type="Node2D"]
 
@@ -10,6 +14,7 @@ z_index = 1
 
 [node name="Background" type="Sprite2D" parent="."]
 modulate = Color(0.77, 0.77, 0.77, 1)
+z_index = -10
 position = Vector2(-7, -1)
 scale = Vector2(1.11133, 0.680664)
 texture = ExtResource("2_lixft")
@@ -19,9 +24,39 @@ scale = Vector2(1.5, 1.5)
 zoom = Vector2(0.77, 0.7)
 
 [node name="Black Background" type="ColorRect" parent="."]
-z_index = -2
-offset_left = -904.0
-offset_top = -466.0
-offset_right = 905.0
-offset_bottom = 506.0
+z_index = -11
+offset_left = -908.0
+offset_top = -457.0
+offset_right = 901.0
+offset_bottom = 515.0
 color = Color(0, 0, 0, 1)
+
+[node name="Top Wall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Top Wall"]
+position = Vector2(-1, -316)
+shape = SubResource("RectangleShape2D_lixft")
+
+[node name="Left Wall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left Wall"]
+position = Vector2(580, -91)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_lixft")
+
+[node name="Right Wall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right Wall"]
+position = Vector2(-594, -8)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_lixft")
+
+[node name="Bottom Wall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom Wall"]
+position = Vector2(-5, 280)
+shape = SubResource("RectangleShape2D_lixft")
+
+[node name="Goblin" parent="." instance=ExtResource("3_qw60k")]
+position = Vector2(0, -150)
+target_path = NodePath("../Player")

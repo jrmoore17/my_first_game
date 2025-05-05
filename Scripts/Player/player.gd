@@ -1,22 +1,31 @@
 extends CharacterBody2D
 
-@export var speed := 200
+@export var speed := 300
 @export var sword_scene: PackedScene
 @export var arrow_scene: PackedScene
 
-func _ready():
-	$PlayerAnimation.scale = Vector2(2, 2)
-
 var facing_direction := Vector2.RIGHT
-var is_attacking := false  # prevent animation conflicts
+var is_attacking := false
 
-func _physics_process(delta):
+var shadow_offset_right = -3
+var shadow_offset_left = -4
+
+var hitbox_offset_right = -5
+var hitbox_offset_left = 5
+
+func _ready():
+	$Visual.scale = Vector2(2, 2)
+	$Visual/Shadow.scale = Vector2(0.4, 0.2)
+
+func _process(_delta):
+	pass
+
+func _physics_process(_delta):
 	if is_attacking:
-		return  # don't move or animate during attack
+		return
 
 	var direction = Vector2.ZERO
 
-	# Movement input
 	if Input.is_action_pressed("move_left"):
 		direction.x -= 1
 	if Input.is_action_pressed("move_right"):
@@ -26,21 +35,21 @@ func _physics_process(delta):
 	if Input.is_action_pressed("move_down"):
 		direction.y += 1
 
-	# Set facing direction
 	if direction.x != 0:
 		facing_direction = Vector2(direction.x, 0).normalized()
-		$PlayerAnimation.flip_h = facing_direction.x < 0
+		$Visual.scale.x = -2 if facing_direction.x < 0 else 2
+		$Visual/Shadow.position.x = shadow_offset_left if facing_direction.x < 0 else shadow_offset_right
+		$Hitbox.position.x = hitbox_offset_left if facing_direction.x < 0 else hitbox_offset_right
 
-	# Move
+	if direction.length() > 0:
+		$Visual/PlayerAnimation.play("run")
+		$Visual/Shadow.scale = Vector2(0.0375, 0.02)
+	else:
+		$Visual/PlayerAnimation.play("idle")
+		$Visual/Shadow.scale = Vector2(0.05, 0.025)
+
 	velocity = direction.normalized() * speed
 	move_and_slide()
-
-	# Play idle or walk animation
-	if direction.length() > 0:
-		$PlayerAnimation.play("run")
-	else:
-		$PlayerAnimation.play("idle")
-		
 	position = position.round()
 
 func _input(event):
@@ -50,24 +59,34 @@ func _input(event):
 		shoot_arrow()
 
 func sword_attack():
+	var attack_dir = get_mouse_direction().normalized()
+	var is_left = attack_dir.x < 0
+
 	if sword_scene:
 		var sword = sword_scene.instantiate()
-		var offset = facing_direction * 20
-		sword.position = global_position + offset
+		var offset = Vector2.LEFT if is_left else Vector2.RIGHT
+		sword.global_position = global_position + offset * 10
+		sword.scale = Vector2(-1, 1) if is_left else Vector2(1, 1)
 		get_tree().current_scene.add_child(sword)
 
-	# Play attack animation
 	is_attacking = true
-	$PlayerAnimation.play("attack")
+	$Visual.scale.x = -2 if is_left else 2
+	$Visual/PlayerAnimation.play("attack")
 
-	# Wait for the attack animation to finish, then return to idle
 	await get_tree().create_timer(0.3).timeout
 	is_attacking = false
-	$PlayerAnimation.play("idle")
+	$Visual/PlayerAnimation.play("idle")
 
 func shoot_arrow():
 	if arrow_scene:
 		var arrow = arrow_scene.instantiate()
-		arrow.position = global_position + facing_direction * 15 + Vector2(0, 30)
-		arrow.direction = facing_direction
+		var attack_dir = get_mouse_direction().normalized()
+		arrow.position = global_position + attack_dir * 10
+		arrow.direction = attack_dir
+		arrow.owner = self  # Set owner so arrow doesn't hit player
 		get_tree().current_scene.add_child(arrow)
+
+
+
+func get_mouse_direction() -> Vector2:
+	return get_global_mouse_position() - global_position

@@ -1,11 +1,12 @@
-[gd_scene load_steps=32 format=3 uid="uid://cmrmu0ljbjc1h"]
+[gd_scene load_steps=34 format=3 uid="uid://cmrmu0ljbjc1h"]
 
 [ext_resource type="Script" uid="uid://nn8t2eapw8r3" path="res://Scripts/Player/player.gd" id="1_h54ih"]
 [ext_resource type="PackedScene" uid="uid://cmbet23qi2pgl" path="res://Scenes/Projectiles/SwordAttack.tscn" id="2_jmcll"]
 [ext_resource type="PackedScene" uid="uid://10j0qi3n651w" path="res://Scenes/Projectiles/Arrow.tscn" id="3_4wape"]
-[ext_resource type="Texture2D" uid="uid://bpd1lloub5ahw" path="res://Assets/_Attack.png" id="4_jmcll"]
-[ext_resource type="Texture2D" uid="uid://dsla25nghfant" path="res://Assets/_Idle.png" id="5_4wape"]
-[ext_resource type="Texture2D" uid="uid://bkcrkbjnio5j6" path="res://Assets/_Run.png" id="6_4wape"]
+[ext_resource type="Texture2D" uid="uid://evg4x1wupn34" path="res://Assets/_Attack.png" id="4_jmcll"]
+[ext_resource type="Texture2D" uid="uid://d1w7h5nw143aw" path="res://Assets/_Idle.png" id="5_4wape"]
+[ext_resource type="Texture2D" uid="uid://b3ripe5n5lyup" path="res://Assets/_Run.png" id="6_4wape"]
+[ext_resource type="Texture2D" uid="uid://coc3njl1rga1q" path="res://Assets/shadow.png" id="7_t26db"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t26db"]
 atlas = ExtResource("4_jmcll")
@@ -193,13 +194,31 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t26db"]
+height = 42.0
+
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(3, -18)
 script = ExtResource("1_h54ih")
 sword_scene = ExtResource("2_jmcll")
 arrow_scene = ExtResource("3_4wape")
 
-[node name="PlayerAnimation" type="AnimatedSprite2D" parent="."]
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="PlayerAnimation" type="AnimatedSprite2D" parent="Visual"]
+position = Vector2(-3, -5)
 sprite_frames = SubResource("SpriteFrames_kyqiw")
 animation = &"idle"
-frame_progress = 0.401036
+offset = Vector2(4, -17)
+
+[node name="Shadow" type="Sprite2D" parent="Visual"]
+modulate = Color(0.25, 0.25, 0.25, 1)
+z_index = -1
+position = Vector2(-3, 18)
+scale = Vector2(0.0693359, 0.0834961)
+texture = ExtResource("7_t26db")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(-8, 1)
+scale = Vector2(2, 2)
+shape = SubResource("CapsuleShape2D_t26db")
