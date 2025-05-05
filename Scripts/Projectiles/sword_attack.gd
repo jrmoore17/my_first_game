@@ -9,3 +9,7 @@ func _ready():
 	# Auto-destroy after a short time
 	await get_tree().create_timer(lifetime).timeout
 	queue_free()
+
+func _on_body_entered(body):
+	if body.is_in_group("enemies"):
+		body.take_damage(1)

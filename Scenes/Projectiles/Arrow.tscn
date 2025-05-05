@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://brtvs4a5spfoi" path="res://Assets/arrow.png" id="2_qaq63"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ljjg1"]
+size = Vector2(43.3333, 16.6667)
 
 [node name="Arrow" type="Area2D"]
 scale = Vector2(0.6, 0.6)
@@ -11,8 +12,10 @@ script = ExtResource("1_1d5eq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 1023
-scale = Vector2(0.03, 0.03)
+position = Vector2(0, -4.76837e-07)
+scale = Vector2(0.0442969, 0.0426693)
 texture = ExtResource("2_qaq63")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.98682e-07)
 shape = SubResource("RectangleShape2D_ljjg1")
